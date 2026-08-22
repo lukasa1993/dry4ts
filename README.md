@@ -1,26 +1,17 @@
 # dry4ts
 
-`dry4ts` finds duplicated normalized token windows in TypeScript and TSX source. It uses the TypeScript scanner and ignores comments and whitespace.
-
-## Install
+`dry4ts` finds normalized duplicate code in TypeScript projects with Tree-sitter tokens. It reports cross-file and non-overlapping same-file duplicates, extends matching windows to maximal blocks, and suppresses contained results.
 
 ```bash
-npm install --global github:lukasa1993/dry4ts
+pipx install git+https://github.com/lukasa1993/dry4ts.git
+dry4ts --min-tokens 30 --fail
 ```
 
-## Run
-
-```bash
-dry4ts --min-tokens 40 --fail
-```
-
-Use positional path fragments to limit source discovery. Use `--json` for machine-readable results.
-
-Identifiers, numbers, and strings are normalized. This finds structural duplication even when local variable names and literal values differ.
+Exit status: `0` pass, `1` analysis error, `2` duplicates found when `--fail` is active.
 
 ## Development
 
 ```bash
-npm ci
-npm test
+python -m pip install -e . pytest
+pytest -q
 ```
